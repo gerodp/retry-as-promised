@@ -41,8 +41,8 @@ module.exports = function retryAsPromised(callback, options) {
   // Massage match option into array so we can blindly treat it as such later
   if (!Array.isArray(options.match)) options.match = [options.match];
 
-  if (options.report) {
-    options.report('Trying ' + options.name + ' #' + options.$current + ' at ' + new Date().toLocaleTimeString(), options);
+  if (options.report && options.$current > 1) {
+    options.report('Retrying ' + options.name + ' #' + options.$current + ' at ' + new Date().toLocaleTimeString(), options);
   }
 
   return new Promise(function(resolve, reject) {
